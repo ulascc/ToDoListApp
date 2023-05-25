@@ -13,6 +13,7 @@
 		52212A8D2A1FB3930069FEBC /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52212A8C2A1FB3930069FEBC /* TaskListView.swift */; };
 		52212A8F2A1FB3940069FEBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52212A8E2A1FB3940069FEBC /* Assets.xcassets */; };
 		52212A932A1FB3940069FEBC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52212A922A1FB3940069FEBC /* Preview Assets.xcassets */; };
+		525310932A1FE1F50017FE29 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525310922A1FE1F50017FE29 /* DataHolder.swift */; };
 		52FAB1CC2A1FB79300B2466E /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAB1CB2A1FB79300B2466E /* FloatingButton.swift */; };
 		52FAB1CF2A1FB83900B2466E /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAB1CE2A1FB83900B2466E /* TaskEditView.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,7 @@
 		52212A8E2A1FB3940069FEBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52212A902A1FB3940069FEBC /* ToDoListApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoListApp.entitlements; sourceTree = "<group>"; };
 		52212A922A1FB3940069FEBC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		525310922A1FE1F50017FE29 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
 		52FAB1CB2A1FB79300B2466E /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		52FAB1CE2A1FB83900B2466E /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +69,7 @@
 				52212A902A1FB3940069FEBC /* ToDoListApp.entitlements */,
 				52212A892A1FB3930069FEBC /* ToDoListApp.xcdatamodeld */,
 				52212A912A1FB3940069FEBC /* Preview Content */,
+				525310922A1FE1F50017FE29 /* DataHolder.swift */,
 			);
 			path = ToDoListApp;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				52FAB1CC2A1FB79300B2466E /* FloatingButton.swift in Sources */,
 				52FAB1CF2A1FB83900B2466E /* TaskEditView.swift in Sources */,
 				52212A8D2A1FB3930069FEBC /* TaskListView.swift in Sources */,
+				525310932A1FE1F50017FE29 /* DataHolder.swift in Sources */,
 				52212A8B2A1FB3930069FEBC /* ToDoListApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

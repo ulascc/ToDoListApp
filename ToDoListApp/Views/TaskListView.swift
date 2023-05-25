@@ -33,24 +33,27 @@ struct TaskListView: View {
                             EditButton()
                         }
                     }
-                }
                     FloatingButton()
-            }
+                }
+            }.navigationTitle("My To Do List")
         }
-        .navigationTitle("My To Do List")
     }
 
 
+    func saveContext(_ context: NSManagedObjectContext) {
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
 
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            saveContext(viewContext)
         }
     }
 }
