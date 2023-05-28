@@ -11,7 +11,7 @@ import CoreData
 struct TaskListView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment var dateHolder: DateHolder
+    @EnvironmentObject var dateHolder: DateHolder
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskItem.dueDate, ascending: true)],
@@ -24,10 +24,11 @@ struct TaskListView: View {
                 ZStack{
                     List {
                         ForEach(items) { item in
-                            NavigationLink(destination: TaskEditView(passedTaskItem: nil, initialDate: Date())
+                            NavigationLink(destination: TaskEditView(passedTaskItem: taskItem, initialDate: Date())
                                 .environmentObject(dateHolder))
                             {
-                                Text(item.dueDate!, formatter: itemFormatter)
+                                TaskCell(passedTaskItem: taskItem)
+                                    .environmentObject(dateHolder)
                             }
                         }
                         .onDelete(perform: deleteItems)

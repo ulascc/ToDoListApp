@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct ToDoListAppApp: App {
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

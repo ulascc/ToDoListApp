@@ -11,7 +11,7 @@ struct TaskEditView: View
 {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment var dateHolder: DateHolder
+    @EnvironmentObject var dateHolder: DateHolder
     
     @State var selectedTaskItem: TaskItem?
     @State var name: String
@@ -53,7 +53,16 @@ struct TaskEditView: View
                 Toggle("Schedule Time", isOn: $scheduleTime)
                 DatePicker("Due Date", selection: $dueDate, displayedComponents: displayComps())
             }
-            
+        
+            if selectedTaskItem?.isCompleted() ?? false
+            {
+                Section(header: Text("Completed"))
+                {
+                    Text(selectedTaskItem?.completedDate?.formatted(date: .abbreviated, time: .shortened) ?? "")
+                        .foregroundColor(.green)
+                }
+            }
+                 
             Section()
             {
                 Button("Save", action: saveAction)
