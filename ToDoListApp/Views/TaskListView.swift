@@ -21,6 +21,9 @@ struct TaskListView: View {
     var body: some View {
         NavigationView {
             VStack{
+                .DateScroller()
+                .padding()
+                .environmentObject(dateHolder)
                 ZStack{
                     List {
                         ForEach(items) { item in
@@ -28,7 +31,7 @@ struct TaskListView: View {
                                 .environmentObject(dateHolder))
                             {
                                 TaskCell(passedTaskItem: taskItem)
-                                    .environmentObject(dateHolder)
+                                .environmentObject(dateHolder)
                             }
                         }
                         .onDelete(perform: deleteItems)
