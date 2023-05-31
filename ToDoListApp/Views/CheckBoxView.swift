@@ -23,7 +23,6 @@ struct CheckBoxView: View {
                     {
                         passedTaskItem.completedDate = Date()
                         dateHolder.saveContext(viewContext)
-                        
                     }
                 }
             }

@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct DateScroller: View {
-    
     @EnvironmentObject var dateHolder: DateHolder
     @Environment(\.managedObjectContext) private var viewContext
     
-    var body: some View {
-        
-        HStack{
+    var body: some View
+    {
+        HStack
+        {
             Spacer()
             Button(action: moveBack)
             {
@@ -22,7 +22,7 @@ struct DateScroller: View {
                     .imageScale(.large)
                     .font(Font.title.weight(.bold))
             }
-            Text(dateHolder.date.formatted())
+            Text(dateFormatted())
                 .font(.title)
                 .bold()
                 .animation(.none)
@@ -59,6 +59,7 @@ struct DateScroller: View {
         }
     }
 }
+
 struct DateScroller_Previews: PreviewProvider {
     static var previews: some View {
         DateScroller()

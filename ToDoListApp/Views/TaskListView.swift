@@ -9,58 +9,81 @@ import SwiftUI
 import CoreData
 
 struct TaskListView: View {
-    
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var dateHolder: DateHolder
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \TaskItem.dueDate, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<TaskItem>
 
-    var body: some View {
-        NavigationView {
-            VStack{
-                .DateScroller()
-                .padding()
-                .environmentObject(dateHolder)
-                ZStack{
-                    List {
-                        ForEach(items) { item in
-                            NavigationLink(destination: TaskEditView(passedTaskItem: taskItem, initialDate: Date())
+    @State var selectedFilter = TaskFilter.NonCompleted
+    
+    var body: some View
+    {
+        NavigationView
+        {
+            VStack
+            {
+                DateScroller()
+                    .padding()
+                    .environmentObject(dateHolder)
+                ZStack
+                {
+                    List
+                    {
+                        ForEach(filteredTaskItems())
+                        { taskItem in
+                            NavigationLink(destination: TaskEditView(passedTaskItem: taskItem, initialDate: taskItem.dueDate!)
                                 .environmentObject(dateHolder))
                             {
                                 TaskCell(passedTaskItem: taskItem)
-                                .environmentObject(dateHolder)
+                                    .environmentObject(dateHolder)
                             }
                         }
                         .onDelete(perform: deleteItems)
                     }
                     .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            EditButton()
+                        ToolbarItem(placement: .confirmationAction) {
+                            Picker("", selection: $selectedFilter.animation())
+                            {
+                                ForEach(TaskFilter.allFilters, id: \.self)
+                                {
+                                    filter in
+                                    Text(filter.rawValue)
+                                }
+                            }
                         }
+            
                     }
+                    
                     FloatingButton()
                         .environmentObject(dateHolder)
                 }
-            }.navigationTitle("My To Do List")
+            }
+            .navigationTitle("To Do List")
         }
     }
 
-
-    func saveContext(_ context: NSManagedObjectContext) {
-        do {
-            try context.save() 
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+    private func filteredTaskItems() -> [TaskItem]
+    {
+        if selectedFilter == TaskFilter.Completed
+        {
+            return dateHolder.taskItems.filter{ $0.isCompleted()}
         }
+        
+        if selectedFilter == TaskFilter.NonCompleted
+        {
+            return dateHolder.taskItems.filter{ !$0.isCompleted()}
+        }
+        
+        if selectedFilter == TaskFilter.OverDue
+        {
+            return dateHolder.taskItems.filter{ $0.isOverdue()}
+        }
+        
+        return dateHolder.taskItems
     }
+
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { filteredTaskItems()[$0] }.forEach(viewContext.delete)
 
             dateHolder.saveContext(viewContext)
         }
